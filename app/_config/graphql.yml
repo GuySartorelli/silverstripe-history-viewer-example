@@ -1,0 +1,12 @@
+SilverStripe\GraphQL\Schema\Schema:
+  schemas:
+    admin:
+      src:
+        - app/_graphql
+
+SilverStripe\GraphQLDevTools\Controller:
+  # show two schemas
+  schemas:
+    - admin
+  # default schema that is selected
+  default_schema: admin

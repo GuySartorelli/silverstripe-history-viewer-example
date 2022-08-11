@@ -1,0 +1,12 @@
+/silverstripe-cache/
+/.env
+/vendor/
+/themes/simple/
+/resources/
+/public/resources/
+.vscode/
+.vagrant/
+.idea/
+/.graphql-generated
+/public/_graphql
+node_modules/

@@ -1,0 +1,11 @@
+---
+Name: CustomAdmin
+After:
+  - 'versionedadmincmsconfig'
+  - 'versionededitform'
+  - 'cmsscripts'
+  - 'elemental' # Only needed if silverstripe-elemental is installed
+---
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - app/client/dist/js/bundle.js

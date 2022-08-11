@@ -1,0 +1,5 @@
+App\MyVersionedObject:
+  fields: '*'
+  operations:
+    readOne: true
+    rollback: true
