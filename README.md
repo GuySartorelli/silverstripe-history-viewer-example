@@ -14,10 +14,10 @@ This is just an example of how to use the history viewer with an arbitary `DataO
 - The actual GraphQL schema is set up in the GraphQL 4 way (see `app/_config/graphql.yml` and `app/_graphql`)
 - This example uses namespaces where the documentation doesn't
 - Some of the file locations are slightly different, particularly in the client dir, but that shouldn't matter.
-- Though the documentation doesn't mention it, for this to work you must do the following before running `yarn build`:
-  - `cd vendor/silverstripe/admin`
-  - Make sure you're using node v10 (e.g. via `nvm use`)
-  - `yarn install`
+- Though the documentation doesn't mention it, for this to work you must do the following before running `yarn build` (to ensure webpack can grab the source code for various components e.g. the injector):
+  1. `cd vendor/silverstripe/admin`
+  1. Make sure you're using node v10 (e.g. via `nvm use`)
+  1. `yarn install`
 
 ## TODO
 - Update the actual documentation
