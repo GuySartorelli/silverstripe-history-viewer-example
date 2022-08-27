@@ -2,6 +2,7 @@
   "name": "my-project",
   "scripts": {
     "build": "yarn && NODE_ENV=production webpack -p --bail --progress",
+    "dev": "yarn && NODE_ENV=development webpack -p --bail --progress",
     "watch": "yarn && NODE_ENV=development webpack --watch --progress"
   },
   "dependencies": {

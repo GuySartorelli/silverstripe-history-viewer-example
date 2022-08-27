@@ -8,34 +8,36 @@ const query = gql`
 query ReadHistoryViewerMyVersionedObject ($id: ID!, $limit: Int!, $offset: Int!) {
     readOneMyVersionedObject(
       versioning: {
-        mode: LATEST
+        mode: ALL_VERSIONS
       },
       filter: {
-          id: {
-          eq: $id
-        }
+        id: { eq: $id }
       }
     ) {
       id
-      versions (limit: $limit, offset: $offset) {
+      versions (limit: $limit, offset: $offset, sort: {
+        version: DESC
+      }) {
         pageInfo {
           totalCount
         }
         nodes {
-            version
-            author {
-              firstName
-              surname
-            }
-            publisher {
-              firstName
-              surname
-            }
-            published
-            liveVersion
-            latestDraftVersion
-            lastEdited
+          version
+          author {
+            firstName
+            surname
           }
+          publisher {
+            firstName
+            surname
+          }
+          deleted
+          draft
+          published
+          liveVersion
+          latestDraftVersion
+          lastEdited
+        }
       }
     }
   }
@@ -48,26 +50,28 @@ const config = {
         limit,
         offset: ((page || 1) - 1) * limit,
         id: recordId,
+        // Never read from the cache. Saved pages should stale the query, and these mutations
+        // happen outside the scope of apollo. This view is loaded asynchronously anyway,
+        // so caching doesn't make any sense until we're full React/GraphQL.
+        fetchPolicy: 'network-only',
       }
     };
   },
-  props(
-    {
-      data: {
-        error,
-        refetch,
-        readOneMyVersionedObject,
-        loading: networkLoading,
+  props({
+    data: {
+      error,
+      refetch,
+      readOneMyVersionedObject,
+      loading: networkLoading,
+    },
+    ownProps: {
+      actions = {
+        versions: {}
       },
-      ownProps: {
-        actions = {
-          versions: {}
-        },
-        limit,
-        recordId,
-      },
-    }
-  ) {
+      limit,
+      recordId,
+    },
+  }) {
     const versions = readOneMyVersionedObject || null;
 
     const errors = error && error.graphQLErrors &&

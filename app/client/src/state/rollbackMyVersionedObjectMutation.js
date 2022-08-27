@@ -2,19 +2,19 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 
 const mutation = gql`
-mutation revertMyVersionedObjectToVersion($id:ID!, $toVersion:Int!) {
-  rollbackMyVersionedObject(
-    ID: $id
-    ToVersion: $toVersion
+mutation rollbackMyVersionedObject($id:ID!, $toVersion:Int!) {
+    rollbackMyVersionedObject(
+    id: $id
+    toVersion: $toVersion
   ) {
-    ID
+    id
   }
 }
 `;
 
 const config = {
   props: ({ mutate, ownProps: { actions } }) => {
-    const revertToVersion = (id, toVersion) => mutate({
+    const rollbackMyVersionedObject = (id, toVersion) => mutate({
       variables: {
         id,
         toVersion,
@@ -24,7 +24,9 @@ const config = {
     return {
       actions: {
         ...actions,
-        revertToVersion,
+        rollbackMyVersionedObject,
+        // For BC (not strictly necessary, perhaps):
+        revertToVersion: rollbackMyVersionedObject,
       },
     };
   },

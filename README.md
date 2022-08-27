@@ -7,10 +7,17 @@ This is just an example of how to use the history viewer with an arbitary `DataO
 
 ## What's different from the documented method
 - `readOneMyVersionedObjectQuery.js` uses the new GraphQL 4 syntax
+  - It is also sorted correctly - it's effectively a copy of [the `SiteTree` equivalent](https://github.com/silverstripe/silverstripe-cms/blob/4/client/src/state/history/readOnePageQuery.js)
+- `revertToMyVersionedObjectVersionMutation.js` has been replaced with `rollbackMyVersionedObjectMutation.js`
+  - This too is copied from [the `SiteTree` equivalent](https://github.com/silverstripe/silverstripe-cms/blob/4/client/src/state/history/rollbackPageMutation.js)
+  - The injector transform config for this has also been updated to reflect the table name defined in the php class
 - The actual GraphQL schema is set up in the GraphQL 4 way (see `app/_config/graphql.yml` and `app/_graphql`)
 - This example uses namespaces where the documentation doesn't
 - Some of the file locations are slightly different, particularly in the client dir, but that shouldn't matter.
+- Though the documentation doesn't mention it, for this to work you must do the following before running `yarn build`:
+  - `cd vendor/silverstripe/admin`
+  - Make sure you're using node v10 (e.g. via `nvm use`)
+  - `yarn install`
 
 ## TODO
-- Update mutation to use the new graphql 4 format
-- Add sorting of versions (current default seems to be most recent version last which is the opposite of page history)
+- Update the actual documentation
